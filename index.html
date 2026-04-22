@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rudra</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg: #DCEFEB;
+  --primary: #8B5E3C;
+  --secondary: #A47551;
+  --text: #2f2f2f;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* layout */
+.container {
+  max-width: 900px;
+  margin: auto;
+  padding: 80px 20px;
+  text-align: center;
+}
+
+/* hero */
+h1 {
+  font-size: 3rem;
+  font-weight: 600;
+}
+
+.tagline {
+  margin-top: 10px;
+  color: #555;
+  font-size: 1.1rem;
+}
+
+/* feature buttons */
+.features {
+  margin-top: 60px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.feature-btn {
+  padding: 14px 22px;
+  border-radius: 30px;
+  border: 1px solid #cbd5d1;
+  background: #ffffff;
+  color: #2f2f2f;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.feature-btn:hover {
+  background: var(--secondary);
+  color: #ffffff;
+  border-color: var(--secondary);
+  transform: translateY(-2px);
+}
+
+/* modal */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.3s;
+}
+
+.modal.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.modal-box {
+  background: white;
+  padding: 30px;
+  border-radius: 16px;
+  width: 320px;
+  text-align: left;
+  transform: scale(0.85);
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.modal.active .modal-box {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.close {
+  float: right;
+  cursor: pointer;
+  font-size: 18px;
+  color: #888;
+}
+
+/* CTA */
+.cta {
+  margin-top: 80px;
+}
+
+input {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+button {
+  padding: 10px 16px;
+  border: none;
+  background: var(--primary);
+  color: #ffffff;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+button:hover {
+  background: var(--secondary);
+}
+
+/* footer */
+.footer {
+  margin-top: 80px;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* mobile responsive */
+@media (max-width: 600px) {
+
+  h1 {
+    font-size: 2.2rem;
+  }
+
+  .container {
+    padding: 50px 15px;
+  }
+
+  .features {
+    gap: 12px;
+  }
+
+  .feature-btn {
+    width: 100%;
+  }
+
+  .modal-box {
+    width: 90%;
+  }
+
+  input {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  button {
+    width: 100%;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Rudra</h1>
+<p class="tagline">your desk companion</p>
+
+<div class="features">
+<button class="feature-btn" onclick="openModal('updates')">Live Updates</button>
+<button class="feature-btn" onclick="openModal('interaction')">Interaction</button>
+<button class="feature-btn" onclick="openModal('productivity')">Productivity</button>
+<button class="feature-btn" onclick="openModal('personality')">Personality</button>
+</div>
+
+<div class="cta">
+  <p>Coming soon</p>
+  <br>
+  <input type="email" placeholder="Email">
+  <button>Notify</button>
+</div>
+
+<div class="footer">
+  © 2026 Rudryukti
+</div>
+
+</div>
+
+<!-- modal -->
+<div class="modal" id="modal">
+  <div class="modal-box">
+    <span class="close" onclick="closeModal()">✕</span>
+    <h3 id="title"></h3>
+    <p id="text"></p>
+  </div>
+</div>
+
+<script>
+function openModal(type) {
+  const data = {
+    updates: ["Live Updates", "Rudra provides real-time weather, local news, and alerts directly on your desk."],
+    interaction: ["Interaction", "Rudra responds with expressions and interactions, making your workspace feel alive."],
+    productivity: ["Productivity", "Rudra helps you stay on track with reminders and subtle nudges."],
+    personality: ["Personality", "Customize Rudra’s behavior, mood, and interaction style."]
+  };
+
+  document.getElementById("title").innerText = data[type][0];
+  document.getElementById("text").innerText = data[type][1];
+
+  document.getElementById("modal").classList.add("active");
+}
+
+function closeModal() {
+  document.getElementById("modal").classList.remove("active");
+}
+
+window.onclick = function(e) {
+  const modal = document.getElementById("modal");
+  if (e.target === modal) closeModal();
+}
+</script>
+
+</body>
+</html>
